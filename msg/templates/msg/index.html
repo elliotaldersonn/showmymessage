@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container ct">
+    <div class="row">
+        <div class="col-md-12 text-by-users">
+            <h1 id="message_text" class="text-center">{{ object.msg }}</h1>
+            <div class="d-flex justify-content-center">
+            		<h2 id="message_reads" class="text-center">{{ obj2.counter }}</h2>
+            		<div class="informatie-icon"><div>i</div><span class="informatie-icon-informatie">Number of views</span></div>
+            </div>
+        </div>
+        <div class="col-md-12 text-center">
+            <button type="button" class="btn btn-outline-primary waves-effect" data-toggle="modal" data-target="#myModal">
+                Change this message
+            </button>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            
+            <div class="modal-header">
+                <h4 class="modal-title">Change this message (Rs. 1.00)</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            
+            <div class="modal-body">
+            	<form action="." method="POST">
+            		{% csrf_token %}
+                <div class="user-message">
+                	<input onfocus="hidePay()" type="text" name="msg" maxlength="140" id="message_input" placeholder="Your message">
+                	<button type="button" class="btn btn-primary waves-effect" onclick="showPay()">Next</button>
+                </div>
+                
+                
+                <div class="spacer"></div>
+                <div id="paypal-button-container" class="">
+                	<button style="margin-left:44%;" type="submit" class="btn mt-0 btn-outline-primary waves-effect"><i class="fas fa-lock mr-2"></i>Pay</button>
+                </div>
+                </form>
+
+               
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
+
+{% block script %}
+<script type="text/javascript">
+                	function showPay() {
+					   document.getElementById('message_input').style.backgroundColor = "lightgrey";
+					   document.getElementById('paypal-button-container').style.display = "block";
+					}
+					function hidePay() {
+					   document.getElementById('paypal-button-container').style.display = "none";
+					   document.getElementById('message_input').style.backgroundColor = "white";
+					}
+</script>
+{% endblock script %}
+

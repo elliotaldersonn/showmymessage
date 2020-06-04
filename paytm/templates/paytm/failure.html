@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container ct">
+    <div class="row">
+        <div class="col-md-12 text-by-users">
+            <h1 id="message_text" class="text-center">Transaction Failed!
+           </h1>
+           <p style="text-align: justify; font-size: 4vw;" class="text-center display-4"> please try again.</p>
+           
+        </div>
+
+    </div>
+
+</div>
+
+
+<div style="position:absolute; bottom: 20%;" class="row justify-content-center">
+
+	<div  class="col-3 text-center d-inline-block "><button type="button" class="btn btn-outline-primary waves-effect" data-toggle="modal" data-target="#myModal">transaction info</button></div>
+
+	<div  class="col-3 btncc text-center d-inline-block "><a href="{% url 'home' %}" class="btn btn-outline-danger waves-effect">Back to Home</a></div>
+</div>
+
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+       <h5 class="modal-title" id="exampleModalLabel">Transaction Info</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ul style="list-style-type:none;">
+        	<li><b>Transaction Status :</b> {{ response.RESPMSG }}</li>
+        	<li><b>Transaction ID :</b> {{ response.TXNID }}</li>
+        	<li><b>Transaction Amount :</b> {{ response.TXNAMOUNT }}</li>
+        	<li><b>Order ID :</b> {{ response.ORDERID }}</li>
+        	<li><b>Bank Name :</b> {{ response.BANKNAME }}</li>
+			<li><b>Bank TxnID :</b> {{ response.BANKTXNID }}</li>
+        	<li><b>Transaction Date :</b> {{ response.TXNDATE }}</li>
+        </ul>
+      </div>
+      
+    </div>
+
+  </div>
+</div>
+
+
+{% endblock content %}
