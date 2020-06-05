@@ -18,9 +18,9 @@
 
 <div style="position:absolute; bottom: 20%;" class="row justify-content-center">
 
-	<div  class="col-3 text-center d-inline-block "><button type="button" class="btn btn-outline-primary waves-effect" data-toggle="modal" data-target="#myModal">transaction info</button></div>
+	<div  class="col-3 text-center d-inline-block "><button type="button" style="font-size:2vw !important;" class="btn btn-outline-primary waves-effect" data-toggle="modal" data-target="#myModal">transaction info</button></div>
 
-	<div  class="col-3 btncc text-center d-inline-block "><a href="{% url 'home' %}" class="btn btn-outline-success waves-effect">Back to Home</a></div>
+	<div  class="col-3 btncc text-center d-inline-block "><a href="{% url 'home' %}" style="font-size:2vw !important;" class="btn btn-outline-success waves-effect">Back to Home</a></div>
 </div>
 
 <div id="myModal" class="modal fade" role="dialog">
@@ -35,7 +35,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <ul style="list-style-type:none;">
+        <ul style="list-style-type:none; margin:5px; padding:5px;">
         	<li><b>Transaction Status :</b> {{ response.RESPMSG }}</li>
         	<li><b>Transaction ID :</b> {{ response.TXNID }}</li>
         	<li><b>Transaction Amount :</b> {{ response.TXNAMOUNT }}</li>
