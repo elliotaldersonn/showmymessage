@@ -36,7 +36,7 @@
             	<form action="." method="POST">
             		{% csrf_token %}
                 <div class="user-message">
-                	<input onfocus="hidePay()" type="text" name="msg" maxlength="140" id="message_input" placeholder="Your message">
+                	<input onfocus="hidePay()" required type="text" name="msg" maxlength="140" id="message_input" placeholder="Your message">
                 	<button type="button" class="btn btn-primary waves-effect" onclick="showPay()">Next</button>
                 </div>
                 
