@@ -23,19 +23,27 @@ def handleresponse(request):
 			#transaction success
 			#Message.objects.filter(order_id=response_dict['ORDERID']).update(status=True)
 			msg = Message.objects.get(order_id=response_dict['ORDERID'])
-			msg.status = True
-			msg.save()
-			Transaction.objects.create(msg=msg,
-			 tstatus=response_dict['RESPMSG'],txnid=response_dict['TXNID'],
-			 txnamount=response_dict['TXNAMOUNT'],order_id=response_dict['ORDERID'],
-			 bank_name=response_dict['BANKNAME'],bank_txnid=response_dict['BANKTXNID'],
-			 tdate=response_dict['TXNDATE'],)
+			#avoid data re-insertion if page gets refreshed
+			if msg.status == False:
+				msg.status = True
+				msg.save()
+			#avoid data re-insertion if page gets refreshed
+			refreshcheck = Transaction.objects.filter(msg=msg)
+			if not refreshcheck.exists():
+				Transaction.objects.create(msg=msg,
+				 tstatus=response_dict['RESPMSG'],txnid=response_dict['TXNID'],
+				 txnamount=response_dict['TXNAMOUNT'],order_id=response_dict['ORDERID'],
+				 bank_name=response_dict['BANKNAME'],bank_txnid=response_dict['BANKTXNID'],
+				 tdate=response_dict['TXNDATE'],)
 			return render(request,'paytm/success.html',{'response':response_dict})
 
 
 	msg = Message.objects.get(order_id=response_dict['ORDERID'])
-	Transaction.objects.create(msg=msg,
-			 tstatus=response_dict['RESPMSG'],txnid=response_dict['TXNID'],
-			 txnamount=response_dict['TXNAMOUNT'],order_id=response_dict['ORDERID'],)
+	#avoid data re-insertion if page gets refreshed
+	refreshcheck = Transaction.objects.filter(msg=msg)
+	if not refreshcheck.exists():
+		Transaction.objects.create(msg=msg,
+				 tstatus=response_dict['RESPMSG'],txnid=response_dict['TXNID'],
+				 txnamount=response_dict['TXNAMOUNT'],order_id=response_dict['ORDERID'],)
 			 
 	return render(request,'paytm/failure.html',{'response':response_dict})
